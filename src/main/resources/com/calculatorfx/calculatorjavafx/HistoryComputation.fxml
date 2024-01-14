@@ -54,6 +54,7 @@
         <buttons>
           <Button mnemonicParsing="false" onAction="#ClearButtonClicked" text="CLEAR" />
             <Button mnemonicParsing="false" onAction="#BackButtonClicked" text="BACK" />
+            <Button mnemonicParsing="false" onAction="#ReadTxt" text="Read TxT" />
         </buttons>
          <padding>
             <Insets right="10.0" />

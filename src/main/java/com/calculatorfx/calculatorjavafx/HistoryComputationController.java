@@ -9,6 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,10 +72,31 @@ public class HistoryComputationController implements Initializable {
 
           //System.out.println(computation.get(i).getFirstNumber());
 
+            writeToTxtFile(firstNum, secondNum, operator, answer);
+
       }
 
 
 
+    }
+
+
+    public void ReadTxt(ActionEvent event)throws IOException
+    {
+        readAndPrintFileContent("write/output.txt");
+
+    }
+
+    private void readAndPrintFileContent(String filePath) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
     }
 
     public void BackButtonClicked(ActionEvent event)throws IOException
@@ -97,6 +126,26 @@ public class HistoryComputationController implements Initializable {
         for(int i = 0; i<arrLength; i++)
         {
             computation.removeAll(computation);
+        }
+    }
+
+
+    private void writeToTxtFile(String firstNum, String secondNum, String operator, String answer) {
+        // Создаем папку "target", если она не существует
+        File targetFolder = new File("write");
+        if (!targetFolder.exists()) {
+            targetFolder.mkdir();
+        }
+
+        // Создаем объект для записи в файл
+        File outputFile = new File("write/output.txt");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
+            // Записываем данные в файл
+            writer.write(firstNum + " " + operator + " " + secondNum + " = " + answer);
+            writer.newLine(); // Добавляем новую строку для разделения записей
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

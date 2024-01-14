@@ -12,6 +12,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +21,8 @@ import java.util.ResourceBundle;
 
 
 public class HelloController implements Initializable {
+
+    private static final Logger logger = LogManager.getLogger(HelloController.class);
 
     @FXML
     private Text tx1;
@@ -109,6 +113,8 @@ public class HelloController implements Initializable {
     @FXML
     private void btn1Clicked(ActionEvent event)
     {
+        logger.info("Information message");
+
         if(isFinished)
         {
             ansText = "";
@@ -177,6 +183,8 @@ public class HelloController implements Initializable {
     {
         if(inputString.isBlank())
         {
+            logger.info("Information message");
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Empty Field");
             alert.setHeaderText("Empty Field");
@@ -184,11 +192,15 @@ public class HelloController implements Initializable {
         }
         else
         {
+            logger.info("Information message");
+
             inputString = inputString.substring(0, inputString.length()-1);
             tx2.setText(inputString);
             if(inputString.isEmpty())
                 tx2.setText("0");
         }
+        logger.info("Information message");
+
         tx2.requestFocus();
 
 
